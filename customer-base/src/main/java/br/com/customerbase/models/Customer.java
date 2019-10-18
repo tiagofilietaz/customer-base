@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.util.StringUtils;
+
 @Entity(name = "customer")
 public class Customer implements Serializable {
 
@@ -24,11 +26,8 @@ public class Customer implements Serializable {
     
     private String lastName;
     
-    private String cpf;
-
-    public Customer() {
-    	//default constructor
-    }
+    @NotNull
+    private String email;
 
     public Integer getId() {
         return id;
@@ -54,12 +53,21 @@ public class Customer implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	
+	public Boolean isCustomerWithoutLastName() {
+		if(StringUtils.isEmpty(this.lastName)) {
+			return true;
+		}
+		return false;
+	}
+
+	
     
 }

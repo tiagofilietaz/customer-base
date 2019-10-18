@@ -1,9 +1,14 @@
 package br.com.customerbase.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.customerbase.email.service.EmailResponseService;
 import br.com.customerbase.models.Customer;
+import br.com.customerbase.models.Email;
 import br.com.customerbase.repositorys.CustomerRepository;
 import br.com.customerbase.service.CustomerService;
 
@@ -12,6 +17,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository repository;
+    
+    private EmailResponseService emailResponseService;
 
     @Override
     public Customer saveCustomer(final Customer customer) {
@@ -19,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Iterable<Customer> findAll() {
+    public List<Customer> findAll() {
         return repository.findAll();
     }
 
@@ -42,6 +49,22 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteAll() {
         repository.deleteAll();
     }
+
+	@Override
+	public Email validateEmail(String email) {
+		return emailResponseService.getEmail(email);
+	}
+
+	@Override
+	public List<Customer> listCustomersWithoutLastName() {
+		List<Customer> listCustomersWithoutLastName = new ArrayList<>();
+		repository.findAll().stream()
+		.filter(item -> item.isCustomerWithoutLastName())
+		.forEach(item -> { 
+			listCustomersWithoutLastName.add(item);
+		});
+		return listCustomersWithoutLastName;
+	}
 
 
 }

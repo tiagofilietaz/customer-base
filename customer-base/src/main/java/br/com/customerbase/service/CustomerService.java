@@ -1,12 +1,15 @@
 package br.com.customerbase.service;
 
+import java.util.List;
+
 import br.com.customerbase.models.Customer;
+import br.com.customerbase.models.Email;
 
 public interface CustomerService {
 
     Customer saveCustomer(Customer customer);
 
-    Iterable<Customer> findAll();
+    List<Customer> findAll();
 
     Customer findId(Integer id);
 
@@ -15,5 +18,9 @@ public interface CustomerService {
     void deleteById(Integer id);
 
     void deleteAll();
+    
+    Email validateEmail(String email);
+    
+    List<Customer> listCustomersWithoutLastName();
 
 }
