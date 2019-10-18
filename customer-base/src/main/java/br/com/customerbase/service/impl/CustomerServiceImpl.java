@@ -18,6 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository repository;
     
+    @Autowired
     private EmailResponseService emailResponseService;
 
     @Override
