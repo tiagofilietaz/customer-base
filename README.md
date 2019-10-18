@@ -3,7 +3,7 @@ repositório para uma api simplificada de cadastro de clientes
 
 ## API de Terceiro utilizada:
 
-API de terceiro responsavel por validar email (<https://api.trumail.io>)
+API de terceiro responsavel por validar email (<https://api.trumail.io>).
 Por ser tratar de uma API Free possuí número de validações restritas.
 
 ## Documentação Swagger
